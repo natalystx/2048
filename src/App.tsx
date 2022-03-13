@@ -1,6 +1,5 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import './App.scss';
-import _ from 'lodash';
 
 interface TitleProps {
   value: number;
