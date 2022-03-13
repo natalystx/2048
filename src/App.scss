@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: #93c0bb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-box {
+  width: 300px;
+  height: 300px;
+  background-color: #a8a286;
+  border-radius: 0.5rem;
+  display: grid;
+  grid-gap: 0.25rem;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  place-items: center;
+  grid-template-areas:
+    'tile-0 tile-1 tile-2 tile-3'
+    'tile-4 tile-5 tile-6 tile-7'
+    'tile-8 tile-9 tile-10 tile-11'
+    'tile-12 tile-13 tile-14 tile-15';
+}
+
+.tile {
+  width: 90%;
+  height: 90%;
+  background-color: #2d725e;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e9f5f4;
+  transition: all 1s ease;
+}
