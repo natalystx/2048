@@ -24,6 +24,47 @@
     'tile-12 tile-13 tile-14 tile-15';
 }
 
+@keyframes up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes down {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes left {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes right {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .tile {
   width: 90%;
   height: 90%;
@@ -34,5 +75,18 @@
   justify-content: center;
   align-items: center;
   color: #202020;
-  transition: all 1s ease;
+  transition: 300ms ease-in-out;
+  transition-property: transform;
+  &[data-direction='ArrowUp'] {
+    animation: up 200ms ease-in-out;
+  }
+  &[data-direction='ArrowDown'] {
+    animation: down 200ms ease-in-out;
+  }
+  &[data-direction='ArrowLeft'] {
+    animation: left 200ms ease-in-out;
+  }
+  &[data-direction='ArrowRight'] {
+    animation: left 200ms ease-in-out;
+  }
 }

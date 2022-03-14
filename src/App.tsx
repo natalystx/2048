@@ -5,14 +5,17 @@ interface TitleProps {
   value: number;
   index: number;
   color?: string;
+  direction?: string;
 }
 
 type Tiles = number[];
 
-const Tile: FC<TitleProps> = ({ value, index, color }) => {
+const Tile: FC<TitleProps> = ({ value, index, color, direction }) => {
   return (
     <span
       className="tile"
+      data-direction={value && direction}
+      data-tile={`tile-${index}`}
       style={{
         gridArea: `tile-${index}`,
         background: value ? color : '#93c0bb',
@@ -133,6 +136,7 @@ function App() {
   const [tileValues, setTileValues] = useState<Tiles>(
     randomTile([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   );
+  const [direction, setDirection] = useState('');
 
   const colors: any = {
     2: '#1f5048',
@@ -149,13 +153,19 @@ function App() {
   };
 
   const manipulateTiles = useCallback(
-    (key: string, tile: Tiles, setter: (val: Tiles) => void) => {
+    (
+      key: string,
+      tile: Tiles,
+      setter: (val: Tiles) => void,
+      directionSetter: (val: string) => void
+    ) => {
       let combined: Tiles;
-
+      directionSetter(key);
       switch (key) {
         case 'ArrowUp':
           combined = calculateVerticalTiles(tile);
           setter(randomTile(combined));
+
           break;
         case 'ArrowDown':
           combined = calculateVerticalTiles(tile, true);
@@ -175,7 +185,7 @@ function App() {
   );
 
   const addEvent = (e: KeyboardEvent) => {
-    manipulateTiles(e.key, tileValues, setTileValues);
+    manipulateTiles(e.key, tileValues, setTileValues, setDirection);
   };
 
   useEffect(() => {
@@ -186,10 +196,19 @@ function App() {
     };
   }, [tileValues]);
 
-  const renderTile = (tiles: Tiles) =>
-    tiles.map((value, index) => (
-      <Tile value={value} index={index} key={index} color={`#${value}ff`} />
-    ));
+  const renderTile = useCallback(
+    (tiles: Tiles) =>
+      tiles.map((value, index) => (
+        <Tile
+          value={value}
+          index={index}
+          key={index}
+          color={`#${value}ff`}
+          direction={direction}
+        />
+      )),
+    [tileValues]
+  );
 
   return (
     <div className="App">
