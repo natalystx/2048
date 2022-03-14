@@ -188,7 +188,7 @@ function App() {
 
   const renderTile = (tiles: Tiles) =>
     tiles.map((value, index) => (
-      <Tile value={value} index={index} key={index} color={`#2d${value}`} />
+      <Tile value={value} index={index} key={index} color={`#${value}ff`} />
     ));
 
   return (
